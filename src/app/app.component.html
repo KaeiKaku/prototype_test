@@ -1,13 +1,71 @@
-<div class="main_container">
-  <form>
-    <textarea id="textarea" #textarea>123</textarea>
-  </form>
-
-  <button>
-    <mat-icon style="color: rgba(142, 142, 160, 1)">send</mat-icon>
-  </button>
-
-  <div id="dot_container">
-    <div class="dots-4"></div>
+<main>
+  <div class="container" #container>
+    <div
+      class="content"
+      *ngFor="let datum of _contents; let i = index"
+      [ngClass]="{
+        self: datum.isSelf,
+        ai: datum.isAi,
+        error: datum.isError,
+        last: i == _contents.length - 1
+      }"
+    >
+      <div
+        class="content_inner"
+        [ngClass]="{ self: datum.isSelf, ai: datum.isAi }"
+      >
+        <ng-container
+          *ngIf="
+            _isLoading && datum.isAi && i == _contents.length - 1;
+            else other
+          "
+        >
+          <div class="loading_container">
+            <div class="dots_loading"></div>
+          </div>
+        </ng-container>
+        <ng-template #other>
+          <div
+            class="avatar"
+            [ngClass]="{ self: datum.isSelf, ai: datum.isAi }"
+          >
+            <mat-icon *ngIf="datum.isError" color="warn">error</mat-icon>
+          </div>
+          <div class="pre_container">
+            <pre><code [ngClass]="{ error: datum.isError }" [innerHTML]="datum.value"></code></pre>
+            <a class="ref_link" *ngFor="let refData of datum.referenceLink">
+              {{ refData.title }}
+            </a>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <!-- ad button -->
+    <div class="ad_bottom">
+      <form class="chat_form">
+        <div class="textarea_container">
+          <div class="scroll_container">
+            <textarea
+              [id]="_ID_CHAT_INPUT_TEXTAREA"
+              rows="1"
+              placeholder="Send a message..."
+              (input)="onTextareaInput()"
+              #textarea
+            ></textarea>
+          </div>
+          <button
+            type="button"
+            class="submitBtn"
+            [disabled]="!_sendReady || _isLoading"
+            (click)="submitRequest()"
+          >
+            <mat-icon [ngClass]="{ disabled: !_sendReady || _isLoading }"
+              >send</mat-icon
+            >
+          </button>
+        </div>
+        <div class="clear"></div>
+      </form>
+    </div>
   </div>
-</div>
+</main>

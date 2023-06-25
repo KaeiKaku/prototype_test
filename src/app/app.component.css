@@ -1,91 +1,144 @@
-div.main_container {
+div.container {
   width: 100%;
+  height: 100%;
+  overflow: overlay;
+}
+
+/* content */
+div.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+div.content.self {
+  background: white;
+}
+div.content.ai {
+  background: rgba(247, 247, 248, 1);
+  border: none;
+  border-top: 1px solid #d9d9e3;
+  border-bottom: 1px solid #d9d9e3;
+}
+div.content.error {
+  background: rgba(244, 67, 54, 0.2);
+  border: none;
+  border-top: 1px solid rgba(244, 67, 54, 0.4);
+  border-bottom: 1px solid rgba(244, 67, 54, 0.4);
+}
+div.content.last {
+  margin-bottom: 10rem;
+}
+
+div.content_inner {
+  width: 800px;
+  display: flex;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: overlay;
   padding: 1rem;
+}
+div.content_inner > div.pre_container {
+  width: calc(800px - 3.5rem);
+  padding: 0 0 0 1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+div.content_inner > div.pre_container > pre > code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+div.content_inner > div.pre_container > pre > code.error {
+  color: #f44336;
+  font-weight: bold;
+}
+div.content_inner > div.pre_container > a.ref_link {
+  display: block;
+  color: blue;
+  cursor: pointer;
+}
+div.content_inner.self {
+  background-color: white;
+}
+div.content_inner.ai {
+  background-color: rgba(247, 247, 248, 1);
+}
+
+/* ab bottom */
+div.ad_bottom {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* form */
+form.chat_form {
+  width: 800px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-form {
-  width: 50%;
-}
-
-#textarea {
+form.chat_form div.clear {
   width: 100%;
-  height: 10rem;
-  border: 1px solid black;
-  resize: none;
+  height: 2rem;
 }
 
-button {
-  display: block;
+form.chat_form div.scroll_container {
   display: flex;
-  align-items: center;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: overlay;
+}
+
+form.chat_form div.textarea_container {
+  position: relative;
+  width: 800px;
+  background-color: white;
   padding: 1rem;
-  margin: 0.5rem;
-  cursor: pointer;
-  border-radius: 0.5rem;
-}
-button:hover {
-  background-color: rgba(217, 217, 227, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.375rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-#dot_container {
-  width: 100%;
-  height: 30rem;
-  border: 1px solid black;
+form.chat_form div.textarea_container textarea#chat_input_textarea {
+  width: calc(100% - 2rem);
+  line-height: 24px;
+  height: auto;
+  resize: none;
+  overflow: hidden;
+}
+
+form.chat_form div.textarea_container textarea#chat_input_textarea:focus {
+  outline: none;
+}
+
+/* submit button */
+button.submitBtn {
+  position: absolute;
+  right: 2rem;
+  bottom: 1rem;
+  display: block;
+  background-color: white;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+button.submitBtn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+button.submitBtn mat-icon {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1rem;
+  color: rgba(142, 142, 160, 1);
 }
-
-.dots-4 {
-  height: 30px;
-  aspect-ratio: 2.5;
-  --_g: no-repeat radial-gradient(farthest-side, #000 90%, #0000);
-  background: var(--_g), var(--_g), var(--_g), var(--_g);
-  background-size: 20% 50%;
-  animation: d4 1s infinite linear alternate;
+button.submitBtn mat-icon.disabled {
+  color: unset;
+  cursor: not-allowed;
 }
-
-@keyframes d4 {
-  0%,
-  5% {
-    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
-      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
-  }
-  12.5% {
-    background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 50%,
-      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
-  }
-  25% {
-    background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 0,
-      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
-  }
-  37.5% {
-    background-position: calc(0 * 100% / 3) 100%, calc(1 * 100% / 3) 0,
-      calc(2 * 100% / 3) 0, calc(3 * 100% / 3) 50%;
-  }
-  50% {
-    background-position: calc(0 * 100% / 3) 100%, calc(1 * 100% / 3) 100%,
-      calc(2 * 100% / 3) 0, calc(3 * 100% / 3) 0;
-  }
-  62.5% {
-    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 100%,
-      calc(2 * 100% / 3) 100%, calc(3 * 100% / 3) 0;
-  }
-  75% {
-    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
-      calc(2 * 100% / 3) 100%, calc(3 * 100% / 3) 100%;
-  }
-  87.5% {
-    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
-      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 100%;
-  }
-  95%,
-  100% {
-    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
-      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
-  }
+button.submitBtn:has(> mat-icon.disabled) {
+  background-color: unset;
 }
